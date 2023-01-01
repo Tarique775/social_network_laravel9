@@ -28,22 +28,19 @@ class UserController extends Controller
     public function getdata()
     {
         try {
-//        $userdata = User::with('posts', 'commentsdata')->get();
-            //$userdata2 = User::with('comments', 'allcomment')->get();
-//            $user = User::find(1);
+            $user=auth()->user();
+            $userId=$user['id'];
+
+            $user = User::find($userId);
 //            #collection #model #object
 //
-//            foreach ($user->roles as $role) {
-//                dd($role->pivot->role_id);
-//            }
+            foreach ($user->roles as $role) {
+                echo $role->pivot->role_id;
+            }
             #authentication vs #authoriazation
             #collection #all_methods of collection
             #array vs #collection
-            $id=auth()->user();
 
-            return response()->json($id);
-
-//        return $userData->toJson(JSON_PRETTY_PRINT);
         } catch (\Exception $exception) {
             dd($exception->getMessage());
         }
